@@ -1,4 +1,11 @@
+import org.w3c.dom.Node;
+
 public class MyStack<Type> {
+    /**
+     * Instance Variables
+     */
+    private Type[] stack;
+
     /**
      * a constructor that initializes an empty MyStack
      */
