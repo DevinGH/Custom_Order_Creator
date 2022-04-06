@@ -20,7 +20,7 @@ public class Burger {
      * @param pattyType
      */
     public void changePatties(String pattyType){
-
+        this.pattyType = pattyType;
     }
 
     /**
@@ -69,6 +69,6 @@ public class Burger {
      * this method converts the Burger to a String for display
      */
     public String toString(){
-
+        return "Placement String";
     }
 }
