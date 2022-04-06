@@ -2,8 +2,28 @@ public class Burger {
     /**
      * Instance Variable
      */
-    private String pattyType;
-    private String pattyCount;
+    private String pattyType = "Beef";
+    private String pattyCount = "Single";
+    private MyStack<String> burger = new MyStack<String>();
+
+    /**
+     * Categories
+     */
+    private enum Patties{
+        BEEF, VEGGIE, CHICKEN
+    }
+
+    private enum Cheeses{
+        CHEDDAR, MOZZARELLA, PEPPERJACK
+    }
+
+    private enum Veggies{
+        LETTUCE, TOMATO, ONIONS, PICKLE, MUSHROOMS
+    }
+
+    private enum Sauces{
+        KETCHUP, MUSTARD, MAYONNAISE, BARONSAUCE
+    }
 
     /**
      * a constructor that  initializes  a  Burger  with only  a  bun  and
@@ -11,6 +31,10 @@ public class Burger {
      * @param theWorks
      */
     Burger(boolean theWorks){
+        if(!theWorks){
+            burger.push("Bun");
+            burger.push(pattyType);
+        }
 
     }
 
@@ -20,7 +44,15 @@ public class Burger {
      * @param pattyType
      */
     public void changePatties(String pattyType){
-        this.pattyType = pattyType;
+        MyStack<String> tempBurger = burger;
+
+        for(int i = 0; i < tempBurger.size(); i++){
+            for(Patties p : Patties.values()){
+                if(tempBurger.pop().equalsIgnoreCase(p.toString())){
+                    tempBurger.push(pattyType);
+                }
+            }
+        }
     }
 
     /**
