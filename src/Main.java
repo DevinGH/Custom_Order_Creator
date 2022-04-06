@@ -6,7 +6,9 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
+        Main main = new Main();
 
+        main.testBurger();
     }
 
     /**
@@ -28,6 +30,17 @@ public class Main {
      * test method for Burger
      */
     public void testBurger(){
+        MyStack<String> testStack = new MyStack<String>();
 
+        testStack.push("Yes");
+        testStack.push("Maybe");
+        testStack.push("No");
+
+        System.out.println("Is stack empty: " + testStack.isEmpty());
+        System.out.println("Size of the stack: " + testStack.size());
+        System.out.println(testStack);
+        System.out.println(testStack.peek());
+        System.out.println(testStack.pop());
+        System.out.println(testStack);
     }
 }
