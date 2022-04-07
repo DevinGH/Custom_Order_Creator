@@ -1,15 +1,16 @@
 public class Burger {
     /**
-     * Instance Variable
+     * Instance Variables
      */
     private String pattyType = "Beef";
     private String pattyCount = "Single";
     private MyStack<String> burger = new MyStack<String>();
+    private MyStack<String> recipe = new MyStack<String>();
 
     /**
      * Categories
      */
-    private enum Patties{
+    /*private enum Patties{
         BEEF, VEGGIE, CHICKEN
     }
 
@@ -23,7 +24,7 @@ public class Burger {
 
     private enum Sauces{
         KETCHUP, MUSTARD, MAYONNAISE, BARONSAUCE
-    }
+    }*/
 
     /**
      * a constructor that  initializes  a  Burger  with only  a  bun  and
@@ -34,6 +35,9 @@ public class Burger {
         if(!theWorks){
             burger.push("Bun");
             burger.push(pattyType);
+        }else{
+            this.recipe();
+            burger = recipe;
         }
 
     }
@@ -46,13 +50,23 @@ public class Burger {
     public void changePatties(String pattyType){
         MyStack<String> tempBurger = burger;
 
+        clear();
+
         for(int i = 0; i < tempBurger.size(); i++){
-            for(Patties p : Patties.values()){
-                if(tempBurger.pop().equalsIgnoreCase(p.toString())){
-                    tempBurger.push(pattyType);
-                }
+            //System.out.println(tempBurger);
+            String temp = tempBurger.pop();
+
+            if(temp.equalsIgnoreCase(this.pattyType)){
+                burger.push(pattyType);
+            }else{
+                burger.push(temp);
             }
+
+            i--;
         }
+
+        this.pattyType = pattyType;
+        System.out.println(burger);
     }
 
     /**
@@ -96,11 +110,44 @@ public class Burger {
 
     }
 
+    /**
+     * Initializes the recipe for the basic baron burger
+     */
+    private void recipe(){
+        recipe.push("Bun");
+        recipe.push("Ketchup");
+        recipe.push("Mustard");
+        recipe.push("Mushrooms");
+        recipe.push(pattyType);
+        recipe.push("Cheddar");
+        recipe.push("Mozzarella");
+        recipe.push("Pepperjack");
+        recipe.push("Onions");
+        recipe.push("Tomato");
+        recipe.push("Lettuce");
+        recipe.push("Baron Sauce");
+        recipe.push("Mayonnaise");
+        recipe.push("Bun");
+        recipe.push("Pickle");
+
+    }
+
+    /**
+     * Clears the burger stack
+     * @return
+     */
+    private void clear(){
+        for(int i = 0; i < burger.size(); i++){
+            burger.pop();
+            i--;
+        }
+    }
+
     @Override
     /**
      * this method converts the Burger to a String for display
      */
     public String toString(){
-        return "Placement String";
+        return burger.toString();
     }
 }

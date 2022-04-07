@@ -76,10 +76,10 @@ public class MyStack<Type> {
      * this method converts the contents of the MyStack to a String for display
      */
     public String toString(){
-        String output = "";
+        String output = "[";
 
         for(MyStack<Type> current = this; !current.isEmpty(); current = current.prev){
-            System.out.print(output + current.item + " ");
+            output += current.item + ", ";
         }
 
         return output;

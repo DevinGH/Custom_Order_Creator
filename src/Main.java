@@ -23,13 +23,6 @@ public class Main {
      * test method for MyStack
      */
     public void testMyStack(){
-
-    }
-
-    /**
-     * test method for Burger
-     */
-    public void testBurger(){
         MyStack<String> testStack = new MyStack<String>();
 
         testStack.push("Yes");
@@ -42,5 +35,16 @@ public class Main {
         System.out.println(testStack.peek());
         System.out.println(testStack.pop());
         System.out.println(testStack);
+    }
+
+    /**
+     * test method for Burger
+     */
+    public void testBurger(){
+        Burger burger = new Burger(true);
+
+        System.out.println(burger);
+        burger.changePatties("Veggie");
+        System.out.println(burger);
     }
 }
