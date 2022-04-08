@@ -8,25 +8,6 @@ public class Burger {
     private MyStack<String> recipe = new MyStack<String>();
 
     /**
-     * Categories
-     */
-    /*private enum Patties{
-        BEEF, VEGGIE, CHICKEN
-    }
-
-    private enum Cheeses{
-        CHEDDAR, MOZZARELLA, PEPPERJACK
-    }
-
-    private enum Veggies{
-        LETTUCE, TOMATO, ONIONS, PICKLE, MUSHROOMS
-    }
-
-    private enum Sauces{
-        KETCHUP, MUSTARD, MAYONNAISE, BARONSAUCE
-    }*/
-
-    /**
      * a constructor that  initializes  a  Burger  with only  a  bun  and
      * patty if theWorks is false and a Baron Burger if theWorks is true
      * @param theWorks
@@ -48,25 +29,27 @@ public class Burger {
      * @param pattyType
      */
     public void changePatties(String pattyType){
-        MyStack<String> tempBurger = burger;
+        MyStack<String> tempBurger = new MyStack<String>();
 
-        clear();
-
-        for(int i = 0; i < tempBurger.size(); i++){
-            //System.out.println(tempBurger);
-            String temp = tempBurger.pop();
+        for(int i = 0; i < burger.size(); i++){
+            String temp = burger.pop();
 
             if(temp.equalsIgnoreCase(this.pattyType)){
-                burger.push(pattyType);
+                tempBurger.push(pattyType);
             }else{
-                burger.push(temp);
+                tempBurger.push(temp);
             }
 
             i--;
         }
 
         this.pattyType = pattyType;
-        System.out.println(burger);
+
+        for(int i = 0; i < tempBurger.size(); i++){
+            burger.push(tempBurger.pop());
+
+            i--;
+        }
     }
 
     /**
@@ -90,7 +73,59 @@ public class Burger {
      * @param type
      */
     public void removeCategory(String type){
+        MyStack<String> tempBurger = new MyStack<String>();
 
+        if(type.equalsIgnoreCase("Sauce")){
+            for(int i = 0; i < burger.size(); i++){
+                String temp = burger.pop();
+
+                if(temp.equalsIgnoreCase("Ketchup") ||
+                temp.equalsIgnoreCase("Mustard") ||
+                temp.equalsIgnoreCase("Mayonnaise") ||
+                temp.equalsIgnoreCase("Baron Sauce")){
+                }else{
+                    tempBurger.push(temp);
+                }
+
+                i--;
+            }
+        }
+        if(type.equalsIgnoreCase("Veggies")){
+            for(int i = 0; i < burger.size(); i++){
+                String temp = burger.pop();
+
+                if(temp.equalsIgnoreCase("Lettuce") ||
+                        temp.equalsIgnoreCase("Tomato") ||
+                        temp.equalsIgnoreCase("Onions") ||
+                        temp.equalsIgnoreCase("Pickle") ||
+                        temp.equalsIgnoreCase("Mushrooms")){
+                }else{
+                    tempBurger.push(temp);
+                }
+
+                i--;
+            }
+        }
+        if(type.equalsIgnoreCase("Cheese")){
+            for(int i = 0; i < burger.size(); i++){
+                String temp = burger.pop();
+
+                if(temp.equalsIgnoreCase("Cheddar") ||
+                        temp.equalsIgnoreCase("Mozzarella") ||
+                        temp.equalsIgnoreCase("Pepperjack")){
+                }else{
+                    tempBurger.push(temp);
+                }
+
+                i--;
+            }
+        }
+
+        for(int i = 0; i < tempBurger.size(); i++){
+            burger.push(tempBurger.pop());
+
+            i--;
+        }
     }
 
     /**
@@ -99,15 +134,47 @@ public class Burger {
      * @param type
      */
     public void addIngredient(String type){
+        MyStack<String> tempBurger = new MyStack<String>();
 
+        for(int i = 0; i < burger.size(); i++){
+            String temp = burger.pop();
+            String compare = recipe.pop();
+
+            if(!temp.equalsIgnoreCase(type) && compare.equalsIgnoreCase(type)){
+                tempBurger.push(type);
+            }else{
+                tempBurger.push(temp);
+            }
+
+            i--;
+        }
+
+        burger = tempBurger;
     }
 
     /**
-     * this  method  removes the  ingredient type  from the Burger
+     * this  method  removes the  ingredient type from the Burger
      * @param type
      */
     public void removeIngredient(String type){
+        MyStack<String> tempBurger = new MyStack<String>();
 
+        for(int i = 0; i < burger.size(); i++){
+            String temp = burger.pop();
+
+            if(temp.equalsIgnoreCase(type)){
+            }else{
+                tempBurger.push(temp);
+            }
+
+            i--;
+        }
+
+        for(int i = 0; i < tempBurger.size(); i++){
+            burger.push(tempBurger.pop());
+
+            i--;
+        }
     }
 
     /**
@@ -130,17 +197,6 @@ public class Burger {
         recipe.push("Bun");
         recipe.push("Pickle");
 
-    }
-
-    /**
-     * Clears the burger stack
-     * @return
-     */
-    private void clear(){
-        for(int i = 0; i < burger.size(); i++){
-            burger.pop();
-            i--;
-        }
     }
 
     @Override

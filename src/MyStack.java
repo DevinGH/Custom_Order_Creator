@@ -79,7 +79,11 @@ public class MyStack<Type> {
         String output = "[";
 
         for(MyStack<Type> current = this; !current.isEmpty(); current = current.prev){
-            output += current.item + ", ";
+            if(current.size() == 1){
+                output += current.item + "]";
+            }else{
+                output += current.item + ", ";
+            }
         }
 
         return output;

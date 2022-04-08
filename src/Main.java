@@ -44,7 +44,7 @@ public class Main {
         Burger burger = new Burger(true);
 
         System.out.println(burger);
-        burger.changePatties("Veggie");
+        burger.removeCategory("Cheese");
         System.out.println(burger);
     }
 }
