@@ -3,7 +3,7 @@ public class Burger {
      * Instance Variables
      */
     private String pattyType = "Beef";
-    private String pattyCount = "Single";
+    private int pattyCount = 0;
     private MyStack<String> burger = new MyStack<String>();
     private MyStack<String> recipe = new MyStack<String>();
 
@@ -16,9 +16,19 @@ public class Burger {
         if(!theWorks){
             burger.push("Bun");
             burger.push(pattyType);
+            burger.push("Bun");
         }else{
+            MyStack<String> nonPrintOrderBurger = new MyStack<String>();
             this.recipe();
-            burger = recipe;
+            while(!recipe.isEmpty()){
+                nonPrintOrderBurger.push(recipe.pop());
+            }
+
+            while(!nonPrintOrderBurger.isEmpty()){
+                burger.push(nonPrintOrderBurger.pop());
+            }
+
+            this.recipe();
         }
 
     }
@@ -56,7 +66,37 @@ public class Burger {
      * this method adds one patty to the Burger up to the maximum of 3
      */
     public void addPatty(){
+        MyStack<String> tempRecipe = new MyStack<String>();
+        boolean addedPatty = false;
 
+        if(recipe.isEmpty()) {
+            this.recipe();
+        }
+            for(int i = 0; i < recipe.size(); i++){
+                if(recipe.peek().equalsIgnoreCase("Pepperjack") && addedPatty == false){
+                    tempRecipe.push(pattyType);
+                    System.out.println("added patty");
+                    addedPatty = true;
+                    pattyCount += 1;
+                }else{
+                    tempRecipe.push(recipe.pop());
+
+                }
+
+                i--;
+            }
+
+            while(!tempRecipe.isEmpty()){
+                recipe.push(tempRecipe.pop());
+            }
+
+
+        System.out.println("Recipe: " + recipe);
+
+        burger.push(pattyType);
+        this.sortBurger();
+        System.out.println("Burger: " + burger);
+        addedPatty = false;
     }
 
     /**
@@ -65,7 +105,24 @@ public class Burger {
      * @param type
      */
     public void addCategory(String type){
-
+        if(type.equalsIgnoreCase("Cheese")){
+            this.addIngredient("Cheddar");
+            this.addIngredient("Pepperjack");
+            this.addIngredient("Mozzarella");
+        }
+        if(type.equalsIgnoreCase("Veggies")){
+            this.addIngredient("Lettuce");
+            this.addIngredient("Tomato");
+            this.addIngredient("Onions");
+            this.addIngredient("Pickle");
+            this.addIngredient("Mushrooms");
+        }
+        if(type.equalsIgnoreCase("Sauce")){
+            this.addIngredient("Ketchup");
+            this.addIngredient("Mustard");
+            this.addIngredient("Mayonnaise");
+            this.addIngredient("Baron Sauce");
+        }
     }
 
     /**
@@ -134,22 +191,10 @@ public class Burger {
      * @param type
      */
     public void addIngredient(String type){
-        MyStack<String> tempBurger = new MyStack<String>();
-
-        for(int i = 0; i < burger.size(); i++){
-            String temp = burger.pop();
-            String compare = recipe.pop();
-
-            if(!temp.equalsIgnoreCase(type) && compare.equalsIgnoreCase(type)){
-                tempBurger.push(type);
-            }else{
-                tempBurger.push(temp);
-            }
-
-            i--;
+        if(!burger.contains(type)){
+            burger.push(type);
+            this.sortBurger();
         }
-
-        burger = tempBurger;
     }
 
     /**
@@ -189,6 +234,11 @@ public class Burger {
         recipe.push("Cheddar");
         recipe.push("Mozzarella");
         recipe.push("Pepperjack");
+        if(pattyCount > 0){
+            for(int i = 0; i < pattyCount; i++){
+                recipe.push(pattyType);
+            }
+        }
         recipe.push("Onions");
         recipe.push("Tomato");
         recipe.push("Lettuce");
@@ -196,6 +246,39 @@ public class Burger {
         recipe.push("Mayonnaise");
         recipe.push("Bun");
         recipe.push("Pickle");
+
+    }
+
+    private void sortBurger(){
+        MyStack<String> holderStack = new MyStack<String>();
+        MyStack<String> orderedStack = new MyStack<String>();
+
+        if(recipe.isEmpty()){
+            this.recipe();
+        }
+        while(!burger.isEmpty()){
+            if(!recipe.peek().equalsIgnoreCase(burger.peek())){
+                if(!burger.contains(recipe.peek())){
+                    recipe.pop();
+                }else{
+                    holderStack.push(burger.pop());
+                }
+
+            }else{
+                orderedStack.push(burger.pop());
+                recipe.pop();
+                while(!holderStack.isEmpty()){
+                    burger.push(holderStack.pop());
+                }
+            }
+        }
+
+        while(!orderedStack.isEmpty()){
+            String item = orderedStack.pop();
+
+            burger.push(item);
+        }
+
 
     }
 

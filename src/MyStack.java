@@ -71,6 +71,25 @@ public class MyStack<Type> {
         return this.isEmpty() ? 0 : 1 + this.prev.size();
     }
 
+    /**
+     * this method returns if the stack contains an item or nor
+     * @return boolean
+     */
+    public boolean contains(Type item){
+        boolean doesContain = false;
+
+        for(MyStack<Type> current = this; !current.isEmpty(); current = current.prev){
+            if(current.item.equals(item)){
+                doesContain = true;
+                break;
+            }else{
+                doesContain = false;
+            }
+        }
+
+        return doesContain;
+    }
+
     @Override
     /**
      * this method converts the contents of the MyStack to a String for display

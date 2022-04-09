@@ -32,9 +32,7 @@ public class Main {
         System.out.println("Is stack empty: " + testStack.isEmpty());
         System.out.println("Size of the stack: " + testStack.size());
         System.out.println(testStack);
-        System.out.println(testStack.peek());
-        System.out.println(testStack.pop());
-        System.out.println(testStack);
+        System.out.println("Yes in stack: " + testStack.contains("No"));
     }
 
     /**
@@ -44,7 +42,14 @@ public class Main {
         Burger burger = new Burger(true);
 
         System.out.println(burger);
+        burger.addPatty();
+        burger.addPatty();
         burger.removeCategory("Cheese");
+        burger.addIngredient("Cheddar");
+        burger.addPatty();
+        burger.removeCategory("Sauce");
         System.out.println(burger);
+
+
     }
 }
