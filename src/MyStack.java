@@ -4,6 +4,7 @@
  * Date: 4/11/2022
  *
  * Source used to help with implementation: https://levelup.gitconnected.com/selfmade-stack-class-in-java-d401dc7d68f0
+ * Github: https://github.com/DevinGH/TCSS_342A/tree/master/src
  */
 public class MyStack<Type> {
     /**

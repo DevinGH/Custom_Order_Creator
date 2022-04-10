@@ -2,6 +2,8 @@
  * TCSS 342A: Homework 1
  * Author: Devin Hanson
  * Date: 4/11/2022
+ *
+ * Github: https://github.com/DevinGH/TCSS_342A/tree/master/src
  */
 
 import java.io.*;
