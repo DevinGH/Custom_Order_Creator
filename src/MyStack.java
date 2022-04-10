@@ -1,3 +1,10 @@
+/**
+ * TCSS 342A: Homework 1
+ * Author: Devin Hanson
+ * Date: 4/11/2022
+ *
+ * Source used to help with implementation: https://levelup.gitconnected.com/selfmade-stack-class-in-java-d401dc7d68f0
+ */
 public class MyStack<Type> {
     /**
      * Instance Variables

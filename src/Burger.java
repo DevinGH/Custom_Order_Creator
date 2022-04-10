@@ -1,3 +1,8 @@
+/**
+ * TCSS 342A: Homework 1
+ * Author: Devin Hanson
+ * Date: 4/11/2022
+ */
 public class Burger {
     /**
      * Instance Variables
@@ -75,7 +80,6 @@ public class Burger {
             for(int i = 0; i < recipe.size(); i++){
                 if(recipe.peek().equalsIgnoreCase("Pepperjack") && addedPatty == false){
                     tempRecipe.push(pattyType);
-                    System.out.println("added patty");
                     addedPatty = true;
                     pattyCount += 1;
                 }else{
@@ -90,12 +94,8 @@ public class Burger {
                 recipe.push(tempRecipe.pop());
             }
 
-
-        System.out.println("Recipe: " + recipe);
-
         burger.push(pattyType);
         this.sortBurger();
-        System.out.println("Burger: " + burger);
         addedPatty = false;
     }
 
@@ -121,7 +121,7 @@ public class Burger {
             this.addIngredient("Ketchup");
             this.addIngredient("Mustard");
             this.addIngredient("Mayonnaise");
-            this.addIngredient("Baron Sauce");
+            this.addIngredient("Baron-Sauce");
         }
     }
 
@@ -139,7 +139,7 @@ public class Burger {
                 if(temp.equalsIgnoreCase("Ketchup") ||
                 temp.equalsIgnoreCase("Mustard") ||
                 temp.equalsIgnoreCase("Mayonnaise") ||
-                temp.equalsIgnoreCase("Baron Sauce")){
+                temp.equalsIgnoreCase("Baron-Sauce")){
                 }else{
                     tempBurger.push(temp);
                 }
@@ -191,7 +191,10 @@ public class Burger {
      * @param type
      */
     public void addIngredient(String type){
-        if(!burger.contains(type)){
+        if(recipe.isEmpty()){
+            this.recipe();
+        }
+        if(!burger.contains(type) && recipe.contains(type)){
             burger.push(type);
             this.sortBurger();
         }
@@ -242,7 +245,7 @@ public class Burger {
         recipe.push("Onions");
         recipe.push("Tomato");
         recipe.push("Lettuce");
-        recipe.push("Baron Sauce");
+        recipe.push("Baron-Sauce");
         recipe.push("Mayonnaise");
         recipe.push("Bun");
         recipe.push("Pickle");
